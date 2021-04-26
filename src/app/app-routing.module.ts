@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AddTaskComponent } from './add-task/add-task.component';
 import { TodoComponent } from './todo/todo.component';
 
+//Ruta de los componentes
 const routes: Routes = [
   { path: '', pathMatch:'full', redirectTo:'/todo'},
   { path: 'todo', component: TodoComponent },
