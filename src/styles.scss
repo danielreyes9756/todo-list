@@ -1,1 +1,63 @@
 /* You can add global styles to this file, and also import other style files */
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';
+
+html, body { height: 100%; }
+body { margin: 0; font-family: "Roboto", "Helvetica Neue", sans-serif; }
+
+h1{font-size: 60px; margin-bottom: 0.5em;}
+h2{text-align: center;}
+
+svg{
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    left: 0;
+    z-index: -1;
+}
+
+#background-bottom{top: unset; bottom: 0;}
+
+.example-form {
+    min-width: 150px;
+    max-width: 600px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}  
+.example-full-width {width: 100%;}
+
+.mat-radio-button {margin-left: 8px;}
+
+#noMargin{margin-left: 0px;}
+
+//Dark Theme
+body[color-theme=true] {
+
+    background-color: #212121;
+    
+    h1,h2,h3,h4,h5,h6, .mat-radio-label-content, .mat-tab-link {color: #ffffff;}
+    
+    .mat-radio-outer-circle{background-color: #ffffff;}
+
+    .mat-form-field-appearance-legacy .mat-form-field-label, .mat-input-element, ::placeholder {color: white;}
+
+    .mat-tab-header {background-color: #332970ce;}
+    
+    svg{
+        path{fill: #332970;}
+    }
+    mat-dialog-container{background-color: #212121;}
+
+    select::content{
+        color: #ff5722
+    }
+
+}
+
+mat-dialog-container{
+    width: 1000px !important;
+}

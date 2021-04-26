@@ -1,0 +1,126 @@
+
+.example-headers-align .mat-expansion-panel-header-title,
+.example-headers-align .mat-expansion-panel-header-description {flex-basis: 0;}
+
+.example-headers-align .mat-expansion-panel-header-description {justify-content: space-between; align-items: center;}
+.example-headers-align .mat-form-field + .mat-form-field {margin-left: 8px;}
+
+mat-card{
+  background-color: #ffffffce;
+  
+  button{height: 45px; margin: 15px 2px 0px;}
+}
+
+.mat-expansion-panel:not([class*="mat-elevation-z"]) {
+  box-shadow: 10px 12px 2px 2px rgba(0, 0, 0, 0.2),2px 2px 2px 0px rgba(0, 0, 0, 0.5),0px 1px 5px 0px rgba(0, 0, 0, 0.4);
+}
+
+.mat-expansion-panel-header{display: revert;}
+
+.custom-control-label { margin-left:15px; font-size: 20px;}
+.custom-checkbox{margin-top: 20px; word-break: break-all;}
+
+.w3-badge {margin-left: 10px;}
+
+.mat-ripple {visibility: hidden;}
+
+p{
+  word-break: break-all;
+}
+/* height */
+$h: 40px;
+/* width */
+$w: $h * 3;
+/* toggle dimensions */
+$tw: $h;
+/* font size */
+$fs: 30px;
+/* toggle's border thickness */
+$bt: 0rem;
+/* toggle box shadow */
+$bs: $bt * 2;
+/* labels animation time */
+$ta: 6s;
+/* label text color */
+$text-color: white;
+
+/* colors: si, ?, no*/
+$colors: #3f51b5 , #ff5722 , #4CAF50 ;
+
+@mixin borderColor($i) {
+  border: $bt solid nth($colors, $i);
+  background: lighten(nth($colors, $i), 10%);
+  box-shadow: 0 0 $bs $bs/2 nth($colors, $i) inset,
+              0 0 $bs $bs/2 nth($colors, $i);
+}
+
+.wrapper {
+  width: $w;
+  height: $h;
+  position: relative;
+  margin: 1.5rem auto;
+  border-radius: $h/2;
+  background: rgba(0, 0, 0, 0.787);
+
+  & .toggle {
+    width: $tw;
+    height: $tw;
+    position: absolute;
+    left: $w / 3 - ($tw - $h) / 2;
+    top: -($tw - $h) / 2;
+    border-radius: 50%;
+    box-sizing: border-box;
+    @include borderColor(2);
+    transition: all .3s cubic-bezier(0.175, 0.885, 0.320, 1.275);
+  }
+
+  & label {
+    cursor: pointer;
+    width: $h;
+    height: $h;
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    z-index: 1;
+    display: inline-block;  
+    
+    text-align: center;
+    line-height: $h;
+    font-size: $fs;
+    color: $text-color;
+  }
+
+  & input {opacity: 0;}}
+
+.yes_radio:checked {
+  ~ .toggle {
+    @include borderColor(1);
+    left: -($tw - $h) / 2;
+  }
+}
+
+.no_radio:checked {
+  ~ .toggle {
+    @include borderColor(3);
+    left: $w * 2 / 3 - ($tw - $h) / 2;
+  }
+}
+
+.maybe_radio, #maybe-lbl {left: 100% * 1 / 3;}
+
+.no_radio, #no-lbl {left: 100% * 2 / 3;}
+
+//https://moderncss.dev/custom-select-styles-with-pure-css/
+select {
+  display: flex;
+  margin: 0 0 0 auto;
+  border: 0.5px solid black;
+  border-radius: 1em;
+  padding: 0.25em 0.5em;
+  font-size: 1.25rem;
+  cursor: pointer;
+}
+
+.selectorStatus{
+  margin: auto !important;
+}

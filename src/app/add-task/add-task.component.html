@@ -1,0 +1,39 @@
+<h1>ADD TASK</h1>
+<div class="container">
+  <h2>Complete this form to add a task!</h2>
+  <hr>
+    <!--Form-->
+  <form class="example-form">
+    <!--Input text Name-->
+    <h4><strong>Name</strong><a style="color:red"> *</a> (Name of the task)</h4>
+    <mat-form-field class="example-full-width">
+      <mat-label>Max 12 chars</mat-label>
+      <input type="text" matInput placeholder="By some food" [(ngModel)]="task.Name" name="name" required minlength="1" maxlength="12"/>
+    </mat-form-field>
+    <!--TextArea description (optional)-->
+    <h4><strong>Description</strong> (Description of the task)</h4>
+    <mat-form-field class="example-full-width">
+      <mat-label>Max 240 chars</mat-label>
+      <textarea matInput placeholder="Go to the shop and buy some food" [(ngModel)]="task.Description" name=Description maxlength="240"></textarea>
+    </mat-form-field>    
+    <!--Radio button priority selector-->
+    <h4><strong>Priority</strong><a style="color:red"> *</a> (most to less)</h4>
+    <mat-radio-group aria-label="Select an option" [(ngModel)]="task.Priority" name="Priority" value="10">
+      <mat-radio-button id="noMargin" value="1">1</mat-radio-button>
+      <mat-radio-button value="2">2</mat-radio-button>
+      <mat-radio-button value="3">3</mat-radio-button>
+      <mat-radio-button value="4">4</mat-radio-button>
+      <mat-radio-button value="5">5</mat-radio-button>
+      <mat-radio-button value="6">6</mat-radio-button>
+      <mat-radio-button value="7">7</mat-radio-button>
+      <mat-radio-button value="8">8</mat-radio-button>
+      <mat-radio-button value="9">9</mat-radio-button>
+      <mat-radio-button value="10" [checked]="true">10</mat-radio-button>
+    </mat-radio-group>
+  </form>
+  <hr>
+  <!--Buttons-->
+  <button type="submit" class="btn btn-success btn-lg btn-block" (click)="createTask()">Create</button>
+  <button type="button" class="btn btn-danger btn-lg btn-block" (click)="cancel()">Cancel</button>
+  <a [(ngModel)]="cutrez" name="cutrez" style="visibility: hidden;"></a>
+</div>

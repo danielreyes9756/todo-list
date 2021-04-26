@@ -1,0 +1,96 @@
+<h1>TODO</h1>
+<div class="container-fluid">
+  <mat-card class="example-card">
+
+    <mat-card-header> 
+      <mat-card-title>List of Task</mat-card-title>
+      <select (change)="sortByProperty($event.target.value)">
+        <option value="Priority">Priority</option>
+        <option value="Name">Task Name</option>
+        <option value="createdAt">Created Date</option>
+      </select> 
+    </mat-card-header>
+
+    <select class="selectorStatus" (change)="sortByStatus($event.target.value)">
+      <option value="I/P/C">In Progress / Pending / Complete</option>
+      <option value="P/C/I">Pending / Complete / In Progress</option>
+      <option value="C/I/P">Complete / In Progress / Pending</option>
+      <option value="I/C/P">In Progress / Complete / Pending </option>
+      <option value="P/I/C">Pending / In Progress / Complete</option>
+      <option value="C/P/I">Complete / Pending / In Progress</option>
+    </select> 
+
+    <label class="custom-control custom-checkbox">
+      <input type="checkbox" 
+      (change)="selectAll();"
+      class="custom-control-input">
+      <span class="custom-control-label" for="chbxTerms"style="margin-left: 10px;">Select All</span>
+      <span class="w3-badge w3-black" >
+        {{totalSelected}}
+      </span>
+    </label>
+
+    <mat-card-content *ngFor="let st of status; let count = index" [attr.data-index]="count">
+      
+        <label class="custom-control custom-checkbox">
+          <input type="checkbox" 
+          (change)="selectByStatus(st);"
+          class="custom-control-input"
+          id="{{st}}">
+          <span class="custom-control-label" for="chbxTerms" style="margin-left: 10px;">{{st}}</span>
+          <span class="w3-badge" 
+          [ngClass]="{'w3-indigo': st==='In progress','w3-deep-orange': st==='Pending', 'w3-green': st==='Complete'}">
+            {{count_status[count]}}
+          </span>
+        </label>
+
+        <div style="margin-bottom:20px;" *ngFor="let task of (tasks | async | sortBy: selector); let i = index" [attr.data-index]="i">
+          <mat-expansion-panel  *ngIf='task.Status == st' [expanded]="step === i" (opened)="setStep(0)" hideToggle>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+
+                <div class="form-group">
+                  <label class="custom-control custom-checkbox">
+                    <input type="checkbox" name="{{task.Status}}" value="{{i}}" type="checkbox"
+                    id="{{task.id}}" (change)="selectById(task.id)" class="custom-control-input">
+                    <span class="custom-control-label" for="chbxTerms">{{task.Name}}</span>
+                  </label>
+                </div>
+
+              </mat-panel-title>
+              
+              <div class="wrapper" (change)="setStatus(task.id,$event.target.value)">
+                <label for="{{task.id}}-S" id="yes-lbl"><span class="material-icons">work</span></label>
+                <input type="radio" value="In progress" name="choice_radio{{task.id}}" class="yes_radio" id="{{task.id}}-S" [checked]="task.Status === 'In progress'">
+                
+                <label for="{{task.id}}-M" id="maybe-lbl"><span class="material-icons">pending</span></label>
+                <input type="radio" value="Pending" name="choice_radio{{task.id}}" class="maybe_radio" id="{{task.id}}-M" [checked]="task.Status === 'Pending'">
+                
+                <label for="{{task.id}}-N" id="no-lbl"><span class="material-icons">done_all</span></label>
+                <input type="radio" value="Complete" name="choice_radio{{task.id}}" class="no_radio" id="{{task.id}}-N" [checked]="task.Status === 'Complete'">
+                
+                <div class="toggle"></div>
+              </div>
+          
+            </mat-expansion-panel-header>
+
+            <mat-panel>Priority {{task.Priority}}</mat-panel>
+            <mat-panel-description>Created At: {{task.createdAt}}</mat-panel-description>
+            <p>{{task.Description}}.</p>
+            <mat-action-row> 
+              <button type="button" class="btn btn-outline-danger btn-lg btn-block" (click)="deleteTask(task.id)">
+                <span class="material-icons">delete</span>
+              </button>
+              <button mat-button class="btn btn-outline-info btn-lg btn-block" (click)="updateTask(task)">
+                <span class="material-icons">update</span>
+              </button>
+            </mat-action-row>
+
+          </mat-expansion-panel>
+        </div>   
+      </mat-card-content>
+      <button type="button" class="btn btn-danger btn-block" (click)="deleteSelected()">
+        Delete<span class="w3-badge w3-black">{{totalSelected}}</span> 
+      </button>
+  </mat-card>
+</div>
