@@ -27,5 +27,18 @@ In this project we use this Material Components:
 * TodoComponent
 * AddTaskComponent
 * DialogExampleComponent
-
+## Services
+In this project we can see two service, one is the sevice that connect with the database, the other one is a pipe that I use to sort the information, but it was an error this file must be a pipe no a service.
+## Model
+This project had a model called Task:
+```
+export interface Task {
+  id?: String,
+  Name: String,
+  Description: String,
+  Status: String,
+  Priority: Number,
+  createdAt: String;
+}
+```
 ## SPA
